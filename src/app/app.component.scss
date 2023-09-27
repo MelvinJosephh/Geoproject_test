@@ -1,0 +1,50 @@
+.customer-details-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+ 
+  }
+  
+  .customer-details-container input {
+    margin-right: 10px;
+  }
+  
+  .order-details-container {
+ display: grid;
+ grid-template-columns: repeat(4, 1fr);
+ gap: 16px;   
+ input {
+  width: 100%;
+ }
+  }
+  
+  .address-container input {
+    margin-right: 10px;
+  }
+  input{
+    width: 100%;
+    height: 30px;
+    margin-bottom: 10px;
+  }
+  
+  .address-container div {
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+  .add-item-section{
+    text-align: center;
+  }
+  .submit-button{
+    margin-top: 30px;
+  }
+  label {
+    width: 100% !important;
+  }
+  .date{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    input{
+      width: 100%;
+    }
+  }
