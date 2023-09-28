@@ -20,7 +20,7 @@
             <input matInput placeholder="Phone Number" value="" formControlName="buyer_phone" />
             <mat-error
               *ngIf="invoiceForm.get('buyer_address')?.hasError('required') && invoiceForm.get('buyer_address')?.dirty">buyer
-              name is required</mat-error>
+              address is required</mat-error>
             <input matInput placeholder="Buyer Email " value="" formControlName="buyer_email" />
             <input matInput placeholder="Buyer Address" value="" formControlName="buyer_address" />
           </div>
@@ -32,7 +32,7 @@
             <label>Date Due</label> <br>
             <input matInput type="date" placeholder="Date Due" formControlName="date_due" />
             <mat-error
-              *ngIf="invoiceForm.get('date_due')?.hasError('required') && invoiceForm.get('date_due')?.dirty">buyer name
+              *ngIf="invoiceForm.get('date_due')?.hasError('required') && invoiceForm.get('date_due')?.dirty">Date due
               is required</mat-error>
           </div>
           <h5>Order details</h5>
