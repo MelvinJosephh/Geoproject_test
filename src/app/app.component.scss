@@ -5,6 +5,7 @@
   margin-top: 10px;
 }
 
+
 .buyer-form {
   overflow: hidden;
   width: auto !important;
@@ -14,15 +15,16 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 16px;
- 
   }
   
   .customer-details-container input {
     margin-right: 10px;
+    width: 90%;
   }
   .create-invoice-section{
     float: right;
   }
+ 
   .order-details-container {
  display: grid;
  grid-template-columns: repeat(4, 1fr);
@@ -31,7 +33,7 @@
   width: 100%;
  }
   }
-  
+
   .address-container input {
     margin-right: 10px;
   }
