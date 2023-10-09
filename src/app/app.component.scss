@@ -1,3 +1,15 @@
+.card {
+  margin: 0 auto;
+  float: none;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.buyer-form {
+  overflow: hidden;
+  width: auto !important;
+}
+
 .customer-details-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -8,7 +20,9 @@
   .customer-details-container input {
     margin-right: 10px;
   }
-  
+  .create-invoice-section{
+    float: right;
+  }
   .order-details-container {
  display: grid;
  grid-template-columns: repeat(4, 1fr);

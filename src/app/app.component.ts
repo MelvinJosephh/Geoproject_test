@@ -17,7 +17,7 @@ export class AppComponent {
     this.invoiceForm = this._fb.group({
       buyer_name: ['', Validators.required],
       buyer_address: ['', Validators.required],
-      buyer_phone: [],
+      buyer_phone: ['', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(10), Validators.maxLength(10)]],
       buyer_email: ['', [Validators.required, Validators.email]],
       date_generated: [new Date(), Validators.required],
       date_due: ['', Validators.required],
@@ -27,17 +27,28 @@ export class AppComponent {
 
   private addOrderDetailsGroup(): FormGroup {
     return this._fb.group({
-      item: [],
-      quantity: [],
-      price: [],
-      amount: []
+      item: ['', Validators.required],
+      quantity: ['', Validators.required],
+      price: ['', Validators.required],
+      amount: ['', Validators.required]
     });
   }
 
   addOrderDetails(): void {
-    this.addOrderDetailsArray.push(this.addOrderDetailsGroup());
+    const lastIndex = this.addOrderDetailsArray.length - 1;
+    const lastGroup = this.addOrderDetailsArray.at(lastIndex) as FormGroup;
 
-    console.log(this.addOrderDetailsArray);
+    if (
+      lastGroup.valid &&
+      lastGroup.get('item')?.value !== '' &&
+      lastGroup.get('quantity')?.value !== '' &&
+      lastGroup.get('price')?.value !== '' &&
+      lastGroup.get('amount')?.value !== ''
+    ) {
+      this.addOrderDetailsArray.push(this.addOrderDetailsGroup());
+    } else {
+      console.log('Please fill out all order details before adding a new one.');
+    }
   }
 
   removeOrderDetails(index: number): void {
@@ -47,7 +58,13 @@ export class AppComponent {
   get addOrderDetailsArray(): FormArray {
     return <FormArray>this.invoiceForm.get('orderDetails');
   }
+
   addInvoice() {
-    this.invoices=[...this.invoices,...[this.invoiceForm.value]]
+    if (this.invoiceForm.valid){
+      this.invoices=[...this.invoices,...[this.invoiceForm.value]]
+    } else {
+      console.log('Please fill out all the required fields before creating Invoice');
+    }
+    
   }
 }

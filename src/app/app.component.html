@@ -3,103 +3,195 @@
     <mat-card-title>Invoice</mat-card-title>
   </mat-card-header>
 
-  <mat-card-content>
+  <mat-card-content >
     <mat-tab-group>
       <mat-tab label="Create Invoice">
-
-
         <h5>Buyer details</h5>
-        <form [formGroup]="invoiceForm">
+        <form class="buyer-form" [formGroup]="invoiceForm">
           <div class="customer-details-container">
-            <input placeholder="Name" value="" formControlName="buyer_name" />
+            <div class="form-group">
+              <input placeholder="Name" value="" formControlName="buyer_name" />
 
-            <span
-              *ngIf="invoiceForm.get('buyer_name')?.hasError('required') && invoiceForm.get('buyer_name')?.dirty">buyer
-              name is required</span>
+              <mat-error
+                *ngIf="
+                  invoiceForm.get('buyer_name')?.hasError('required') &&
+                  invoiceForm.get('buyer_name')?.dirty
+                "
+                >Buyer name is required</mat-error
+              >
+            </div>
+            <div class="form-group">
+              <input
+                matInput
+                placeholder="Phone Number"
+                value=""
+                formControlName="buyer_phone"
+              />
+              <mat-error
+                *ngIf="
+                  invoiceForm.get('buyer_phone')?.hasError('required') &&
+                  invoiceForm.get('buyer_phone')?.dirty
+                "
+                >Buyer phone number is required</mat-error
+              >
+            </div>
 
-            <input matInput placeholder="Phone Number" value="" formControlName="buyer_phone" />
-            <mat-error
-              *ngIf="invoiceForm.get('buyer_address')?.hasError('required') && invoiceForm.get('buyer_address')?.dirty">buyer
-              address is required</mat-error>
-            <input matInput placeholder="Buyer Email " value="" formControlName="buyer_email" />
-            <input matInput placeholder="Buyer Address" value="" formControlName="buyer_address" />
-          </div>
-          <div class="date">
-            <label>Date Generated</label> <br>
-            <input type="date" placeholder="Date Generated" formControlName="date_generated" />
-          </div>
-          <div class="date">
-            <label>Date Due</label> <br>
-            <input matInput type="date" placeholder="Date Due" formControlName="date_due" />
-            <mat-error
-              *ngIf="invoiceForm.get('date_due')?.hasError('required') && invoiceForm.get('date_due')?.dirty">Date due
-              is required</mat-error>
+            <div class="form-group">
+              <input
+                matInput
+                placeholder="Buyer Email "
+                value=""
+                formControlName="buyer_email"
+              />
+              <mat-error
+                *ngIf="
+                  invoiceForm.get('buyer_email')?.hasError('required') &&
+                  invoiceForm.get('buyer_email')?.dirty
+                "
+                >Buyer email is required</mat-error
+              >
+            </div>
+            <div class="form-group">
+              <input
+                matInput
+                placeholder="Buyer Address"
+                value=""
+                formControlName="buyer_address"
+              />
+              <mat-error
+                *ngIf="
+                  invoiceForm.get('buyer_address')?.hasError('required') &&
+                  invoiceForm.get('buyer_address')?.dirty
+                "
+                >Buyer address is required</mat-error
+              >
+            </div>
+
+            <div class="date">
+              <label>Date Generated</label> <br />
+              <input
+                type="date"
+                placeholder="Date Generated"
+                formControlName="date_generated"
+              />
+            </div>
+            <div class="date">
+              <label>Date Due</label> <br />
+              <input
+                matInput
+                type="date"
+                placeholder="Date Due"
+                formControlName="date_due"
+              />
+              <mat-error
+                *ngIf="
+                  invoiceForm.get('date_due')?.hasError('required') &&
+                  invoiceForm.get('date_due')?.dirty
+                "
+                >Date due is required</mat-error
+              >
+            </div>
           </div>
           <h5>Order details</h5>
-          <div class="order-details-container" *ngFor="let group of addOrderDetailsArray.controls; let i = index"
-            formArrayName="orderDetails">
-
+          <div
+            class="order-details-container"
+            *ngFor="let group of addOrderDetailsArray.controls; let i = index"
+            formArrayName="orderDetails"
+          >
             <div [formGroupName]="i">
-              <input matInput placeholder="Item" value="" formControlName="item" />
-              <input matInput placeholder="Quantity" value="" formControlName="quantity" />
-              <input matInput placeholder="Price per Unit" value="" formControlName="price" />
-              <input matInput placeholder="Amount" value="" formControlName="amount" />
+              <input
+                matInput
+                placeholder="Item"
+                value=""
+                formControlName="item"
+              />
+              <input
+                matInput
+                placeholder="Quantity"
+                value=""
+                formControlName="quantity"
+              />
+              <input
+                matInput
+                placeholder="Price per Unit"
+                value=""
+                formControlName="price"
+              />
+              <input
+                matInput
+                placeholder="Amount"
+                value=""
+                formControlName="amount"
+              />
             </div>
           </div>
           <div class="add-item-section">
-            <button mat-button color="primary" mat-raised-button (click)="addOrderDetails()">
+            <button
+              mat-button
+              color="primary"
+              mat-raised-button
+              (click)="addOrderDetails()"
+            >
               Add more items
             </button>
           </div>
-          <button class="submit-button" mat-button color="primary" mat-raised-button (click)="addInvoice()">Create
-            Invoice</button>
+          <button
+            class="submit-button"
+            mat-button
+            color="primary"
+            mat-raised-button
+            (click)="addInvoice()"
+            [disabled]="!invoiceForm.valid"
+          >
+            Create Invoice
+          </button>
         </form>
-
       </mat-tab>
       <mat-tab label="Invoices">
-
         <table mat-table [dataSource]="invoices" class="mat-elevation-z8">
-
           <ng-container matColumnDef="invoice_no">
-            <th mat-header-cell *matHeaderCellDef> No. </th>
-            <td mat-cell *matCellDef="let element"> </td>
+            <th mat-header-cell *matHeaderCellDef>No.</th>
+            <td mat-cell *matCellDef="let element"></td>
           </ng-container>
 
           <!-- Name Column -->
           <ng-container matColumnDef="buyer_name">
-            <th mat-header-cell *matHeaderCellDef> Name </th>
-            <td mat-cell *matCellDef="let element">{{element.buyer_name}}</td>
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let element">{{ element.buyer_name }}</td>
           </ng-container>
 
           <!-- Buyer address Column -->
           <ng-container matColumnDef="buyer_address">
-            <th mat-header-cell *matHeaderCellDef> Address </th>
-            <td mat-cell *matCellDef="let element">{{element.buyer_address}}</td>
+            <th mat-header-cell *matHeaderCellDef>Address</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.buyer_address }}
+            </td>
           </ng-container>
 
           <!-- Date generated Column -->
           <ng-container matColumnDef="date_generated">
-            <th mat-header-cell *matHeaderCellDef> Date Generated </th>
-            <td mat-cell *matCellDef="let element">{{element.date_generated}}</td>
+            <th mat-header-cell *matHeaderCellDef>Date Generated</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.date_generated }}
+            </td>
           </ng-container>
           <!-- Date Due Column -->
           <ng-container matColumnDef="date_due">
-            <th mat-header-cell *matHeaderCellDef> Date Due</th>
-            <td mat-cell *matCellDef="let element">{{element.date_due}}</td>
+            <th mat-header-cell *matHeaderCellDef>Date Due</th>
+            <td mat-cell *matCellDef="let element">{{ element.date_due }}</td>
           </ng-container>
           <!-- Action Column -->
           <ng-container matColumnDef="action">
-            <th mat-header-cell *matHeaderCellDef> Action</th>
-            <td mat-cell *matCellDef="let element"><app-invoice-pdf [invoiceDetails]="element"> </app-invoice-pdf></td>
+            <th mat-header-cell *matHeaderCellDef>Action</th>
+            <td mat-cell *matCellDef="let element">
+              <app-invoice-pdf [invoiceDetails]="element"> </app-invoice-pdf>
+            </td>
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
-
-
       </mat-tab>
     </mat-tab-group>
   </mat-card-content>
-
 </mat-card>
