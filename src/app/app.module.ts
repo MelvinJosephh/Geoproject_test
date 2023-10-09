@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InvoicePdfComponent } from './invoice-pdf/invoice-pdf.component';
 import { CurrencyPipe, DatePipe } from '@angular/common';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
     MatButtonModule,
     FormsModule,
     MatTableModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatSnackBarModule
   ],
   providers: [DatePipe,
   CurrencyPipe],

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {MatSnackBar} from '@angular/material/snack-bar'
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,7 @@ export class AppComponent {
 
   displayedColumns: string[] = ['invoice_no', 'buyer_name', 'buyer_address', 'date_generated', 'date_due', 'action'];
 
-  constructor(private _fb: FormBuilder) {
+  constructor(private _fb: FormBuilder, private snackBar: MatSnackBar) {
     this.invoiceForm = this._fb.group({
       buyer_name: ['', Validators.required],
       buyer_address: ['', Validators.required],
@@ -62,6 +63,8 @@ export class AppComponent {
   addInvoice() {
     if (this.invoiceForm.valid){
       this.invoices=[...this.invoices,...[this.invoiceForm.value]]
+    
+      this.snackBar.open('Invoice created successfully', 'Close', {duration: 3000, panelClass: ['success-snackbar']});
     } else {
       console.log('Please fill out all the required fields before creating Invoice');
     }
